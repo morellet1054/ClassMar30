@@ -1,33 +1,24 @@
 ---
-title: "Campain Events Analysis"
-author: "Morelle Tinsley"
-date: "3/30/2021"
-output: html_document
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+library(flexdashboard)
 library(tidyverse)
 library(lubridate)
 library(plotly)
-
-events <- readRDS("events_saved.rds")
 ```
 
+Column {data-width=650}
+-----------------------------------------------------------------------
 
+### Chart A
 
-
-```{r cars}
-
-events_month <- events %>% 
-  mutate(month(date))
-
-kamala_months <- events_month %>% 
-  filter(cand_lastname == "Harris") %>% 
-  count(month = month(date))
-
-kamala_months
-
+```{r}
 michigan<-events %>% 
   filter(state == "MI") %>% 
     group_by(cand_lastname) %>% 
@@ -48,12 +39,18 @@ fig <- fig %>% layout(
 fig 
 ```
 
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
 ```
 
+### Chart C
 
-
-```{r pressure, echo=FALSE}
+```{r}
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

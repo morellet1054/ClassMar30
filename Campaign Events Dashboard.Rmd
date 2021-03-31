@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Events Dashboard"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -16,9 +16,11 @@ library(plotly)
 Column {data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Events in Michigan by Candidate
 
 ```{r}
+events <- readRDS("events_saved.rds")
+
 michigan<-events %>% 
   filter(state == "MI") %>% 
     group_by(cand_lastname) %>% 

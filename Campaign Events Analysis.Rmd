@@ -1,0 +1,48 @@
+---
+title: "Campain Events Analysis"
+author: "Morelle Tinsley"
+date: "3/30/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(lubridate)
+library(plotly)
+
+events <- readRDS("events_saved.rds")
+```
+
+
+
+
+```{r cars}
+michigan<-events %>% 
+  filter(state == "MI") %>% 
+    group_by(cand_lastname) %>% 
+    count(cand_lastname)
+
+
+
+#Data Visualisation
+fig <- plot_ly(data=michigan, labels = ~cand_lastname, values = ~n)
+
+fig <- fig %>% add_pie(hole = 0.6) #would make a pie chart, to make a donut chart add the hole
+
+fig <- fig %>% layout(
+                  title = "Events in Michigan by Candidate",  showlegend = F,
+                  xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                  yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+fig 
+```
+```
+
+
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
